@@ -1,5 +1,5 @@
 import React from 'react';
-import {searchIcon, calendarIcon, } from './../assets/index';
+import {searchIcon } from './../assets/index';
 
 
 const SearchBarComponent: React.FC<any> = () => {

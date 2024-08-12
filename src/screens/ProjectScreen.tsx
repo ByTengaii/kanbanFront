@@ -3,12 +3,13 @@ import React from 'react';
 const ProjectScreen: React.FC<any> = () => {
 
     return (
-        <div className='
-        flex 
+        <div id='container'
+        className='
+        flex
+        flex-col
+        w-full
+        h-full
         '>
-            <div >
-                <h1>Test</h1>
-            </div>
         </div>
     );
 }

@@ -16,8 +16,6 @@ const menuItems = [
     { name: 'Tasks', icon: tasksIcon() },
     { name: 'Members', icon: membersIcon() },
     { name: 'Settings', icon: settingsIcon() },
-
-
 ]
 
 
@@ -36,7 +34,7 @@ const projectItems = [
 ];
 
 
-const TestComponent: React.FC<any> = () => {
+const NavbarComponent: React.FC<any> = () => {
 
     return (
         <div
@@ -200,5 +198,5 @@ const TestComponent: React.FC<any> = () => {
     );
 }
 
-export default TestComponent;
+export default NavbarComponent;
 
