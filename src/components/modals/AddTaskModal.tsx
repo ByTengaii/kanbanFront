@@ -19,7 +19,7 @@ const AddTaskModal: React.FC<AddEquipmentModalProps> = observer(({
             overlayClassName={'fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50'}
         >
             <h1 className='mb-8'>Add Task Card</h1>
-            <label htmlFor=""></label>
+            <label htmlFor="priority"></label>
             <select name="" id="">
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
