@@ -76,7 +76,6 @@ const KanvanColumn: React.FC<KanvanColumnProps> = observer(({
                         justify-center
                         ml-auto
                         cursor-pointer
-                        bg-red-600
                         z-10
                     '>
                         {addSquareIcon(24,theme)}
