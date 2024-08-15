@@ -34,7 +34,7 @@ const projectItems = [
 ];
 
 
-const NavbarComponent: React.FC<any> = () => {
+const NavBarComponent: React.FC<any> = () => {
 
     return (
         <div
@@ -55,6 +55,7 @@ const NavbarComponent: React.FC<any> = () => {
             px-6
             py-8
             border-b-2
+            max-h-[5.85rem]
              '>
                 <div
                     id='header-left'
@@ -110,6 +111,9 @@ const NavbarComponent: React.FC<any> = () => {
                     items-center
                     gap-x-3
                     py-2
+                    px-3
+                    rounded-lg
+                    hover:bg-[#5030E514]
                     '>
                         <div
                             className='
@@ -162,6 +166,7 @@ const NavbarComponent: React.FC<any> = () => {
                         py-2
                         px-2
                         rounded-lg
+                        hover:bg-[#5030E514]
                             ${item.isSelected ? "bg-[#5030E514] bg-opacity-10": ""}
                         `}
                         >
@@ -198,5 +203,5 @@ const NavbarComponent: React.FC<any> = () => {
     );
 }
 
-export default NavbarComponent;
+export default NavBarComponent;
 
