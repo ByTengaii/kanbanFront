@@ -1,13 +1,16 @@
 import React from 'react';
 import { addSquareIcon } from '../../assets';
+import { observer } from 'mobx-react-lite';
 
 
 interface KanvanColumnProps {
     title: 'To Do' | 'In Progress' | 'Done';
+    cardNumber: number;
     children?: React.ReactNode;
 }
 const KanvanColumn: React.FC<KanvanColumnProps> = ({
     title,
+    cardNumber,
     children
 }) => {
     const theme = title === 'To Do' ? '#5030E5' : title === 'In Progress' ? '#FFA500' : '#8BC48A';
@@ -55,7 +58,7 @@ const KanvanColumn: React.FC<KanvanColumnProps> = ({
                 h-5
                 rounded-lg
                 ml-3'>
-                    4
+                    {cardNumber}
                 </p>
                 {/** Add Square Icon For To Do */}
                 {title === 'To Do' && (
@@ -75,4 +78,4 @@ const KanvanColumn: React.FC<KanvanColumnProps> = ({
     );
 };
 
-export default KanvanColumn;
+export default observer(KanvanColumn);

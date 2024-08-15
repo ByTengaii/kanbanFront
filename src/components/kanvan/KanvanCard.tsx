@@ -1,10 +1,12 @@
 import React from 'react';
 import { ShowAppointersComponent } from '../';
 import { fileFolderIcon, messageIcon } from '../../assets';
+import { KanvanBoard, MockupData } from '../../models/KanvanBoardModels';
+import { observer } from 'mobx-react-lite';
+import { action } from 'mobx';
 interface TaskCardProps {
-    title: string;
-    description: string;
-    priority: 'Low' | 'Medium' | 'High';
+    data: MockupData;
+    KanvanBoard: KanvanBoard;
 }
 
 
@@ -75,10 +77,14 @@ const InfoItem = ({ icon, text }: { icon: any, text: string }) => {
     );
 }
 const KanvanCard: React.FC<TaskCardProps> = ({
-    title,
-    description,
-    priority
+    data,
+    KanvanBoard
 }) => {
+    const { id, title, description, priority } = data;
+    const handleRemoveItem = () => {
+        console.log('Remove Item:', id);
+        KanvanBoard.removeItem(id);
+    };
     return (
         <div id='container'
             className='
@@ -94,7 +100,12 @@ const KanvanCard: React.FC<TaskCardProps> = ({
             <div id='top'
                 className='flex  items-center justify-between'>
                 {PriorityBrand(priority)}
-                <p className='text-text-active text-lg font-extrabold'>...</p>
+                <div className=' w-5 h-5 bg-red-500 cursor-point '
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleRemoveItem();
+                }}>
+                </div>
             </div>
             <div id='Content'
                 className='flex flex-col gap-y-2 text-left'>
@@ -115,4 +126,4 @@ const KanvanCard: React.FC<TaskCardProps> = ({
     )
 }
 
-export default KanvanCard;
+export default observer(KanvanCard);

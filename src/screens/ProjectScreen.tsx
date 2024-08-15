@@ -28,6 +28,7 @@ import {
 } from '../assets';
 
 import { MockupData, KanvanBoard } from '../models/KanvanBoardModels';
+import { observer } from 'mobx-react-lite';
 
 
 
@@ -94,106 +95,8 @@ const mockupData3 = [
     }
 ] as MockupData[];
 
-const Kanvan = new KanvanBoard(mockupData, mockupData2, mockupData3);
-
 const ProjectScreen: React.FC<any> = () => {
-    /*const [todoSection, setTodoSection] = useState(mockupData);
-    const [inProgressSection, setInProgressSection] = useState(mockupData2 as MockupData[]);
-    const [doneSection, setDoneSection] = useState(mockupData3 as MockupData[]);
-
-    const handleOnDragEnd = (result: DropResult) => {
-        console.log(result);
-        if (!result.destination) return;
-        // If the item is dropped in the same column
-        if (result.destination.droppableId === result.source.droppableId) {
-            switch (result.destination.droppableId) {
-                case 'todo': {
-                    const items = Array.from(todoSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    items.splice(result.destination.index, 0, reorderedItem);
-                    setTodoSection(items);
-                    break;
-                } case 'inprogress': {
-                    const items = Array.from(inProgressSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    items.splice(result.destination.index, 0, reorderedItem);
-                    setInProgressSection(items);
-                    break;
-                }
-                case 'done': {
-                    const items = Array.from(doneSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    items.splice(result.destination.index, 0, reorderedItem);
-                    setDoneSection(items);
-                    break;
-                }
-            }
-        } else {
-            // If the item is dropped in a different column
-            switch (result.source.droppableId) {
-                case 'todo': {
-                    const items = Array.from(todoSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    setTodoSection(items);
-                    switch (result.destination.droppableId) {
-                        case 'inprogress': {
-                            const items = Array.from(inProgressSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setInProgressSection(items);
-                            break;
-                        }
-                        case 'done': {
-                            const items = Array.from(doneSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setDoneSection(items);
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case 'inprogress': {
-                    const items = Array.from(inProgressSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    setInProgressSection(items);
-                    switch (result.destination.droppableId) {
-                        case 'todo': {
-                            const items = Array.from(todoSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setTodoSection(items);
-                            break;
-                        }
-                        case 'done': {
-                            const items = Array.from(doneSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setDoneSection(items);
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case 'done': {
-                    const items = Array.from(doneSection);
-                    const [reorderedItem] = items.splice(result.source.index, 1);
-                    setDoneSection(items);
-                    switch (result.destination.droppableId) {
-                        case 'todo': {
-                            const items = Array.from(todoSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setTodoSection(items);
-                            break;
-                        }
-                        case 'inprogress': {
-                            const items = Array.from(inProgressSection);
-                            items.splice(result.destination.index, 0, reorderedItem);
-                            setInProgressSection(items);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    }*/
+    const Kanvan = new  KanvanBoard(mockupData, mockupData2, mockupData3);
 
     return (
         <div id='container'
@@ -242,7 +145,7 @@ const ProjectScreen: React.FC<any> = () => {
             flex-col
             gap-y-10
             max-w-full
-            h-[calc(100vh-5.85rem)]'>
+            h-full'>
                 <div id='header-section'
                     className='flex flex-col gap-y-10'>
                     <div id='header-content'
@@ -326,7 +229,7 @@ const ProjectScreen: React.FC<any> = () => {
                     className='
                 flex
                 w-full
-                h-full
+                max-h-[calc(100vh-19rem)]
                 justify-between          
                 '>
                     <DragDropContext onDragEnd={Kanvan.moveItem}>
@@ -335,9 +238,9 @@ const ProjectScreen: React.FC<any> = () => {
                                 <div
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto'>
-                                    <KanvanColumn title='To Do'>
-                                        {Kanvan.getTodos().map((item, index) => {
+                                    className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
+                                    <KanvanColumn title='To Do' cardNumber={Kanvan.getTodos.length}>
+                                        {Kanvan.getTodos.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>
                                                     {(provided) => (
@@ -345,7 +248,7 @@ const ProjectScreen: React.FC<any> = () => {
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}>
-                                                            <KanvanCard title={item.title} description={item.description} priority={item.priority} />
+                                                            <KanvanCard data={item} KanvanBoard={Kanvan} />
                                                         </div>
                                                     )}
                                                 </Draggable>
@@ -361,9 +264,9 @@ const ProjectScreen: React.FC<any> = () => {
                                 <div
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto'>
-                                    <KanvanColumn title='In Progress'>
-                                        {Kanvan.getInProgress().map((item, index) => {
+                                    className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
+                                    <KanvanColumn title='In Progress' cardNumber={Kanvan.getInProgress.length}>
+                                        {Kanvan.inProgress.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>
                                                     {(provided) => (
@@ -371,7 +274,7 @@ const ProjectScreen: React.FC<any> = () => {
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}>
-                                                            <KanvanCard title={item.title} description={item.description} priority={item.priority} />
+                                                            <KanvanCard data={item} KanvanBoard={Kanvan} />
                                                         </div>
                                                     )}
                                                 </Draggable>
@@ -387,9 +290,9 @@ const ProjectScreen: React.FC<any> = () => {
                                 <div
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    className='w-[calc(33.33%-0.7rem)] h-full'>
-                                    <KanvanColumn title='Done'>
-                                        {Kanvan.getDones().map((item, index) => {
+                                    className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
+                                    <KanvanColumn title='Done' cardNumber={Kanvan.getDones.length}>
+                                        {Kanvan.getDones.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>
                                                     {(provided) => (
@@ -397,7 +300,7 @@ const ProjectScreen: React.FC<any> = () => {
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}>
-                                                            <KanvanCard title={item.title} description={item.description} priority={item.priority} />
+                                                            <KanvanCard data={item} KanvanBoard={Kanvan} />
                                                         </div>
                                                     )}
                                                 </Draggable>
