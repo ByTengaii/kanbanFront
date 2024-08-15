@@ -6,3 +6,4 @@ export {default as ShowContributersComponent} from "./ShowContributers";
 export {default as KanvanColumn} from "./kanvan/KanvanColumn";
 export {default as KanvanCard} from "./kanvan/KanvanCard";
 export {default as ShowAppointersComponent} from "./ShowAppointersComponent";
+export {default as AddTaskModal} from "./modals/AddTaskModal";

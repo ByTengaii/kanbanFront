@@ -10,7 +10,8 @@ import {
     SearchBarComponent,
     ShowContributersComponent,
     KanvanColumn,
-    KanvanCard
+    KanvanCard,
+    AddTaskModal,
 } from '../components';
 import {
     addSquareIcon,
@@ -26,10 +27,7 @@ import {
     messageIcon,
     pauseLinearIcon
 } from '../assets';
-
 import { MockupData, KanvanBoard } from '../models/KanvanBoardModels';
-import { observer } from 'mobx-react-lite';
-
 
 
 const mockupData = [
@@ -106,6 +104,7 @@ const ProjectScreen: React.FC<any> = () => {
         w-full
         h-[100vh]
         '>
+            <AddTaskModal KanvanBoard={Kanvan} />
             <div id='top'
                 className='
             flex
@@ -239,7 +238,7 @@ const ProjectScreen: React.FC<any> = () => {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                     className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
-                                    <KanvanColumn title='To Do' cardNumber={Kanvan.getTodos.length}>
+                                    <KanvanColumn Kanvan={Kanvan} title='To Do' cardNumber={Kanvan.getTodos.length}>
                                         {Kanvan.getTodos.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>
@@ -265,7 +264,7 @@ const ProjectScreen: React.FC<any> = () => {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                     className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
-                                    <KanvanColumn title='In Progress' cardNumber={Kanvan.getInProgress.length}>
+                                    <KanvanColumn Kanvan={Kanvan} title='In Progress' cardNumber={Kanvan.getInProgress.length}>
                                         {Kanvan.inProgress.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>
@@ -291,7 +290,7 @@ const ProjectScreen: React.FC<any> = () => {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                     className='w-[calc(33.33%-0.7rem)] h-full overflow-y-auto no-scrollbar'>
-                                    <KanvanColumn title='Done' cardNumber={Kanvan.getDones.length}>
+                                    <KanvanColumn Kanvan={Kanvan} title='Done' cardNumber={Kanvan.getDones.length}>
                                         {Kanvan.getDones.map((item, index) => {
                                             return (
                                                 <Draggable draggableId={item.id.toString()} key={item.id} index={index}>

@@ -66,11 +66,11 @@ export class KanvanBoard {
         return this.dones;
     }
 
-    get getIsModalOpen(){
+    get modalStatus(){
         return this.isModalOpen;
     }
 
-    set setIsModalOpen (isOpen: boolean) {
+    set modalStatus (isOpen: boolean) {
         this.isModalOpen = isOpen;
     }
 

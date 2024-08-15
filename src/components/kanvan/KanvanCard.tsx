@@ -76,7 +76,7 @@ const InfoItem = ({ icon, text }: { icon: any, text: string }) => {
         </div>
     );
 }
-const KanvanCard: React.FC<TaskCardProps> = ({
+const KanvanCard: React.FC<TaskCardProps> = observer(({
     data,
     KanvanBoard
 }) => {
@@ -100,11 +100,12 @@ const KanvanCard: React.FC<TaskCardProps> = ({
             <div id='top'
                 className='flex  items-center justify-between'>
                 {PriorityBrand(priority)}
-                <div className=' w-5 h-5 bg-red-500 cursor-point '
+                <div className=' w-5 h-5 cursor-pointer flex justify-center items-center'
                 onClick={(e) => {
                     e.preventDefault();
                     handleRemoveItem();
                 }}>
+                   <span className='text-text-active font-extrabold'>...</span> 
                 </div>
             </div>
             <div id='Content'
@@ -124,6 +125,6 @@ const KanvanCard: React.FC<TaskCardProps> = ({
             </div>
         </div>
     )
-}
+});
 
-export default observer(KanvanCard);
+export default KanvanCard;
