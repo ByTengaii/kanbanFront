@@ -1,4 +1,4 @@
-import { makeObservable, observable, action, computed } from "mobx";
+import { makeObservable, observable, action } from "mobx";
 import { DropResult } from "react-beautiful-dnd";
 
 export type MockupData = {

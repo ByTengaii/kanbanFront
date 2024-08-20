@@ -3,7 +3,7 @@ import { ShowAppointersComponent } from '../';
 import { fileFolderIcon, messageIcon } from '../../assets';
 import { KanvanBoard, MockupData } from '../../models/KanvanBoardModels';
 import { observer } from 'mobx-react-lite';
-import { action } from 'mobx';
+
 interface TaskCardProps {
     data: MockupData;
     KanvanBoard: KanvanBoard;
@@ -105,7 +105,7 @@ const KanvanCard: React.FC<TaskCardProps> = observer(({
                     e.preventDefault();
                     handleRemoveItem();
                 }}>
-                   <span className='text-text-active font-extrabold'>...</span> 
+                   <span className='text-text-active font-thin'>X</span> 
                 </div>
             </div>
             <div id='Content'

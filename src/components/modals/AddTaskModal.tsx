@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import { KanvanBoard } from '../../models/KanvanBoardModels';
 import { observer } from 'mobx-react-lite';

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     DragDropContext,
     Droppable,
     Draggable,
-    DropResult,
 } from 'react-beautiful-dnd';
 import {
     DropdownButton,
@@ -93,8 +92,9 @@ const mockupData3 = [
     }
 ] as MockupData[];
 
+const Kanvan = new  KanvanBoard(mockupData, mockupData2, mockupData3);
+
 const ProjectScreen: React.FC<any> = () => {
-    const Kanvan = new  KanvanBoard(mockupData, mockupData2, mockupData3);
 
     return (
         <div id='container'
@@ -316,6 +316,6 @@ const ProjectScreen: React.FC<any> = () => {
 
         </div>
     );
-}
+};
 
 export default ProjectScreen;
